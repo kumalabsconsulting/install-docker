@@ -3,24 +3,6 @@
 # Add some extrat stuff
 # Author: J.CUADRADO <kumalabsconsulting> <redbeard28>
 
-## Check if Debian OS
-if test -r /etc/os-release
-  then
-	ID=`awk -F= '$1=="ID" { print $2 ;}' /etc/os-release`
-	VERSION=`awk -F= '$1=="VERSION" { print $2 ;}' /etc/os-release`
-else
-  echo "Don't know what os-type it is !"
-  exit 1
-fi
-
-echo "ID is $ID"
-if [[ "$ID" == 'debian' ]];then
-  echo $ID
-else
-  echo "This script is usefull for debian os"
-  exit 1
-fi
-
 
 #### Function
 docker_install_by_root () {
@@ -78,18 +60,35 @@ docker_install_by_others () {
 }
 
 
-
-
 ## MAIN
-if [[ "$EUID" -ne 0 ]];then
-
-  if [[ `which sudo` -ne 0 ]];then
-	  echo "There is no sudo command, please install..."
-    exit 1
-  fi
+## Check if Debian OS
+if test -r /etc/os-release
+  then
+	ID=`awk -F= '$1=="ID" { print $2 ;}' /etc/os-release`
+	VERSION=`awk -F= '$1=="VERSION" { print $2 ;}' /etc/os-release`
 else
-  docker_install_by_root "$1"
+  echo "Don't know what os-type it is !"
+  exit 1
 fi
 
+echo "ID is $ID"
+if [[ "$ID" == 'debian' ]];then
+  echo $ID
+# Actions for Debian OS
+  if [[ "$EUID" -ne 0 ]];then
 
-
+    if [[ `which sudo` -ne 0 ]];then
+  	  echo "There is no sudo command, please install..."
+      exit 1
+    fi
+  else
+    docker_install_by_root "$1"
+  fi
+elif [[ "$ID" == 'ubuntu' ]];then
+  sudo apt-get update
+  sudo apt-get install -y snapd
+  sudo snap install docker
+else
+  echo "This script is usefull for debian/ubuntu os"
+  exit 1
+fi
