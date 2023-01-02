@@ -88,6 +88,7 @@ elif [[ "$ID" == 'ubuntu' ]];then
   sudo apt-get update
   sudo apt-get install -y snapd
   sudo snap install docker
+  sudo usermod -a -G docker $MYUSER
 else
   echo "This script is usefull for debian/ubuntu os"
   exit 1
