@@ -85,6 +85,7 @@ if [[ "$ID" == 'debian' ]];then
     docker_install_by_root "$1"
   fi
 elif [[ "$ID" == 'ubuntu' ]];then
+  MYUSER=$1
   sudo apt-get update
   sudo apt-get install -y snapd
   sudo snap install docker
