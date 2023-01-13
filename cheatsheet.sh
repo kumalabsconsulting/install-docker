@@ -62,7 +62,7 @@ docker volume ls                            # Liste les volumes
 docker volume inspect <Vo­­lu­m­e>              # Contrôle le volume
 docker volume create <Vo­­lu­m­e>               # Create volume
 docker volume rm <Vo­­lu­m­e>                   # Remove volume
-    => <Vo­lum­e> replace by ID or volume's NAME
+#    => <Vo­lum­e> replace by ID or volume's NAME
 
 
 ##############################################################################
@@ -98,7 +98,7 @@ docker network rm <Ne­­tw­o­r­k>                            # Supprime un r
 docker network connect <Ne­­tw­o­r­k> <Co­­nt­a­i­ne­­r>           # Connecte un conteneur au réseau
 docker network connect --ip <IP> <Ne­­tw­o­r­k> <Co­­nt­a­i­ne­­r> # Spécifie l'adresse IP de l'inte­rface du conteneur
 docker network disconnect <Ne­­tw­o­r­k_­­Nam­­e> <Co­­nt­a­i­ne­­r>   # Déconnecte le conteneur du réseau
-    => <Ré­sea­u> peut être remplacé par l'ID ou le NOM du réseau
+#    => <Ré­sea­u> peut être remplacé par l'ID ou le NOM du réseau
 
 
 
@@ -145,4 +145,5 @@ docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
 docker stack services <appname>                 # List the services associated with an app
 docker stack ps <appname>                       # List the running containers associated with an app
 docker stack rm <appname>                       # Tear down an application
+
 
