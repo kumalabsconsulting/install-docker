@@ -74,16 +74,7 @@ fi
 echo "ID is $ID"
 if [[ "$ID" == 'debian' ]];then
   echo $ID
-# Actions for Debian OS
-  if [[ "$EUID" -ne 0 ]];then
-
-    if [[ `which sudo` -ne 0 ]];then
-  	  echo "There is no sudo command, please install..."
-      exit 1
-    fi
-  else
-    docker_install_by_root "$1"
-  fi
+  docker_install_by_root "$1"
 elif [[ "$ID" == 'ubuntu' ]];then
   MYUSER=$1
   sudo apt-get update
