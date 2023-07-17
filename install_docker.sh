@@ -21,15 +21,15 @@ docker_install_by_root () {
   HOST_TYPE=`virt-what`
   if [[ "$HOST_TYPE" == 'lxc' ]];then
 	  echo "You are installing Docker on a $HOST_TYPE type"
-	  mkdir -p /etc/apt/keyrings
-	  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo \
+   fi
+  mkdir -p /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
     $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-    apt-get update
-    apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-    usermod -a -G docker $MYUSER
-  fi
+  apt-get update
+  apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  usermod -a -G docker $MYUSER
 }
 
 docker_install_by_others () {
@@ -47,16 +47,16 @@ docker_install_by_others () {
   echo "Checking what type of host..."
   HOST_TYPE=`virt-what`
   if [[ "$HOST_TYPE" == 'lxc' ]];then
-	  echo "You are installing Docker on a $HOST_TYPE type"
-	  sudo mkdir -p /etc/apt/keyrings
-	  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo \
+	  echo "You are installing Docker on a $HOST_TYPE type" 
+  fi
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-    sudo usermod -a -G docker $MYUSER
-  fi
+  sudo apt-get update
+  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  sudo usermod -a -G docker $MYUSER
 }
 
 
